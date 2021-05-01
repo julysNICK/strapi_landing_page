@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '../../../../../../ckeditor5-custom/build/ckeditor';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -14,25 +14,62 @@ const Wrapper = styled.div`
 `;
 
 const configuration = {
-  toolbar: [
-    'heading',
-    '|',
-    'bold',
-    'italic',
-    'link',
-    'bulletedList',
-    'numberedList',
-    '|',
-    'indent',
-    'outdent',
-    '|',
-    'blockQuote',
-    'insertTable',
-    'mediaEmbed',
-    'undo',
-    'redo',
-  ],
+  toolbar: {
+    items: [
+      'heading',
+      '|',
+      'bold',
+      'italic',
+      'link',
+      'bulletedList',
+      'numberedList',
+      '|',
+      // 'indent',
+      // 'outdent',
+      '|',
+      // 'imageUpload',
+      'blockQuote',
+      'insertTable',
+      'mediaEmbed',
+      'undo',
+      'redo',
+      'alignment',
+      'code',
+      'codeBlock',
+      'fontBackgroundColor',
+      'fontColor',
+      // 'fontSize',
+      // 'fontFamily',
+      'horizontalLine',
+      'htmlEmbed',
+      // 'imageInsert',
+      'removeFormat',
+      'strikethrough',
+      'subscript',
+      'superscript',
+      'underline'
+    ]
+  },
+  language: 'pt-br',
+  image: {
+    toolbar: [
+      'imageTextAlternative',
+      'imageStyle:full',
+      'imageStyle:side',
+      'linkImage'
+    ]
+  },
+  table: {
+    contentToolbar: [
+      'tableColumn',
+      'tableRow',
+      'mergeTableCells',
+      'tableCellProperties',
+      'tableProperties'
+    ]
+  },
 };
+
 
 const Editor = ({ onChange, name, value }) => {
   return (
@@ -41,7 +78,6 @@ const Editor = ({ onChange, name, value }) => {
         editor={ClassicEditor}
         config={configuration}
         data={value}
-        onReady={editor => editor.setData(value)}
         onChange={(event, editor) => {
           const data = editor.getData();
           onChange({ target: { name, value: data } });
